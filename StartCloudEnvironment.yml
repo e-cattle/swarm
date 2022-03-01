@@ -19,7 +19,7 @@ services:
       - manager_network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 2
       placement:
         constraints: [node.role == manager]
 
@@ -36,7 +36,7 @@ services:
       - manager_network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 2
       placement:
         constraints: [node.role == manager]
 
@@ -53,9 +53,20 @@ services:
       - manager_network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 2
       placement:
         constraints: [node.role == manager]
+  database:
+      image: mongo
+      ports:
+        - "${MONGO_PORT}:27017"
+      networks:
+        - manager_network
+      deploy:
+        mode: replicated
+        replicas: 2
+        placement:
+          constraints: [node.role == manager]
 
 networks:
   manager_network:
