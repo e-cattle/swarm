@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+  cloud-api:
+    image: ygobrito/cloud-api:latest
+    command: ["sh", "-c", "npm i & npm run serve"]
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DOCKER_NODE_PORT=${NODE_PORT}
+      - DOCKER_MONGO_PORT=${MONGO_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - FACEBOOK_ID=${FACEBOOK_ID}
+      - FACEBOOK_SECRET=${FACEBOOK_SECRET}
+      - GOOGLE_ID=${GOOGLE_ID}
+      - GOOGLE_SECRET=${GOOGLE_SECRET}
+
+    ports:
+      - "${CLOUD_API_PORT}:8080"
+    networks:
+      - manager_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+  portal-web:
+    image: ygobrito/portal-web:latest
+    command: ["sh", "-c", "npm i & npm run serve"]
+    environment:
+      - VUE_APP_CLOUD=${VUE_APP_CLOUD}
+      - VUE_APP_GOOGLE=${VUE_APP_GOOGLE}
+      - VUE_APP_FACEBOOK=${VUE_APP_FACEBOOK}
+    ports:
+      - "${WEB_PORT}:8080"
+    networks:
+      - manager_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+  gestor-inquilino:
+    image: ygobrito/gestor-inquilino:latest
+    command: ["sh", "-c", "npm i & npm run serve"]
+    environment:
+      - VUE_APP_CLOUD=${VUE_APP_CLOUD}
+      - VUE_APP_GOOGLE=${VUE_APP_GOOGLE}
+      - VUE_APP_FACEBOOK=${VUE_APP_FACEBOOK}
+    ports:
+      - "${MANAGER_PORT}:8080"
+    networks:
+      - manager_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  manager_network:
+    driver: overlay # swarm requer driver overlay
+    attachable: true # containers fora do swarm podem se conectar aos serviços
