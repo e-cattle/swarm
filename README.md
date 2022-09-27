@@ -14,7 +14,12 @@ Este repositório é responsável por inicializar o ambiente *cloud* da platafor
 docker swarm init --advertise-addr eth0
 ```
 >##### Observação: O nó que executar o início da rede *swarm* será o *manager*
- 
+
+## Criando a rede para que todos os serviços façam parte e consigam se comunicar
+```
+docker network create manager_network --driver overlay --attachable 
+```
+
 ## Adicione os nós *workers* na rede *swarm* conforme instruções geradas pelo comando anterior   
 ```
 docker swarm join --token tokenGeradoPeloCOmandoAnterior ipEPortaGeradosPeloComandoAnterior
