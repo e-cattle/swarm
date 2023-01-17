@@ -8,7 +8,7 @@ O ambiente *cloud* da plataforma e-cattle é composto por diversos serviços org
 Este repositório é responsável por inicializar o ambiente *cloud* da plataforma. 
 
 ## Executando o projeto via script
-Baixe o script *[cloud-script.sh](https://github.com/e-cattle/swarm/cloud-script.sh)* e execute os seguintes comandos
+Baixe o script *[cloud-script.sh](https://github.com/e-cattle/swarm/blob/main/cloud-script.sh)* e execute os seguintes comandos
 ```
 sudo chmod a+x cloud-script.sh
 ./cloud-script.sh
