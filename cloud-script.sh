@@ -73,7 +73,6 @@ create_manager()
 # Cria um nó worker
 create_worker()
 {
-  echo "CRIAR WORKER"
   default_install
   sleep "2s"
   echo "${green}Execute o seguinte comando no nó Manager da rede swarm${reset}"
