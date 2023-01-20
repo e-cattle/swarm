@@ -70,10 +70,19 @@ create_manager()
     PS3="Escolha qual tipo de nó o PC terá no ambiente cloud do e-cattle: "
 }
 
+# Adiciona um nó manager no ambiente swarm já criado
+join_manager()
+{
+  default_install
+  sleep "2s"
+  echo "${green}Execute o seguinte comando no nó Manager da rede swarm${reset}"
+  echo "${yellow}docker swarm join-token manager${reset}"
+  echo "${green}Cole o código resultante aqui${reset}"
+}
+
 # Cria um nó worker
 create_worker()
 {
-  echo "CRIAR WORKER"
   default_install
   sleep "2s"
   echo "${green}Execute o seguinte comando no nó Manager da rede swarm${reset}"
@@ -84,9 +93,13 @@ create_worker()
 # Menu principal do script
 select choice in "${options[@]}"; do
     case $choice in
-        "Manager")
+        "Criar rede swarm e nó Manager")
             echo "Você escolheu $choice"
             create_manager
+            break;;
+        "Adicionar nó Manager na rede swarm ")
+            echo "Você escolheu $choice"
+            join_manager
             break;;
         "Worker")
             echo "Você escolheu $choice"
