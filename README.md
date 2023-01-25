@@ -16,6 +16,16 @@ sudo chmod a+x cloud-script.sh
 
 ## Executando o projeto manualmente
 
+### Instalando e configurando docker
+
+```
+sudo apt-get install docker.io -y
+sudo usermod -aG docker SEU_USUÁRIO
+sudo chmod 666 /var/run/docker.sock
+```
+>##### Observação: caso não saiba seu usuário utilize o comando ```whoami``` no terminal  
+
+
 ### Iniciando rede *swarm* na interface eth0
 
 ```
