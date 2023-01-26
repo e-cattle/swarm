@@ -51,9 +51,7 @@ docker stack deploy -c portainer-agent-stack.yml portainer
 >##### Observação: Abrir porta 9000 no navegador e configurar usuário e senha para o portainer
 
 ### Criar token de acesso da API do portainer para criar as *stacks* das farms
-```
 https://user-images.githubusercontent.com/2881494/214864162-a4a3d7b2-72c0-43dc-b420-ef3d31308811.mp4
-```
 >##### Observação: Adicionar o token criado na variável de ambiente TOKEN_PORTAINER_API
 
 ### Fazer *download* do arquivo de configuração do ambiente *swarm*
