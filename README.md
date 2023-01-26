@@ -50,16 +50,22 @@ docker stack deploy -c portainer-agent-stack.yml portainer
 ```
 >##### Observação: Abrir porta 9000 no navegador e configurar usuário e senha para o portainer
 
+### Criar token de acesso da API do portainer para criar as *stacks* das farms
+```
+https://user-images.githubusercontent.com/2881494/214864162-a4a3d7b2-72c0-43dc-b420-ef3d31308811.mp4
+```
+>##### Observação: Adicionar o token criado na variável de ambiente TOKEN_PORTAINER_API
+
 ### Fazer *download* do arquivo de configuração do ambiente *swarm*
 ```
-wget https://github.com/e-cattle/swarm/swarm.yml
+wget https://raw.githubusercontent.com/e-cattle/swarm/main/swarm.yml
 ```
 
 ### Configurando variáveis de ambiente que serão utilizadas na rede *swarm* pelos *containers*
 ```
 env NODE_ENV="" NODE_PORT="" MONGO_PORT=""  JWT_SECRET=""  
 SMTP_HOST="" SMTP_PORT="" SMTP_SECURE="" SMTP_FROM="" DOCKER_EMAIL=""
-VUE_APP_CLOUD="nomeStackSwarm_nomeServiçoCloudAPI"
+VUE_APP_CLOUD="nomeStackSwarm_nomeServiçoCloudAPI" TOKEN_PORTAINER_API=""
 ```
 
 ### Executando *stack* do *swarm*
@@ -79,4 +85,5 @@ docker stack deploy -c swarm.yml nomeStackSwarm
 - **SMTP_FROM**: Texto padrão do campo Assunto do e-mail;
 - **DOCKER_EMAIL**: Porta que o SMTP vai rodar no *host*;
 - **VUE_APP_CLOUD**: Nome do serviço da API do ambiente *cloud*;
+- **TOKEN_PORTAINER_API**: Token para consumir API do portainer;
 
