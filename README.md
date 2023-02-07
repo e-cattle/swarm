@@ -45,7 +45,7 @@ docker swarm join --token tokenGeradoPeloCOmandoAnterior ipEPortaGeradosPeloComa
 
 ### Instalando portainer para gerenciamento do ambiente *swarm*
 ```
-curl -L https://downloads.portainer.io/ce2-14/portainer-agent-stack.yml -o portainer-agent-stack.yml
+curl -L https://downloads.portainer.io/ce2-17/portainer-agent-stack.yml -o portainer-agent-stack.yml
 docker stack deploy -c portainer-agent-stack.yml portainer
 ```
 >##### Observação: Abrir porta 9000 no navegador e configurar usuário e senha para o portainer
