@@ -2,6 +2,7 @@ version: '3.8'
 services:
   cloud-api:
     image: ecattle/cloud-api:latest
+    hostname: cloud-api
     command: ["sh", "-c", "npm i & npm run start"]
     environment:
       - NODE_ENV=${NODE_ENV}
@@ -15,9 +16,9 @@ services:
       - DOCKER_EMAIL=${DOCKER_EMAIL}
 
     ports:
-      - "${CLOUD_API_PORT}:8080"
+      - "${NODE_PORT}:3000"
     networks:
-      - manager_network
+      - swarm_network
     deploy:
       mode: replicated
       replicas: 2
@@ -26,13 +27,12 @@ services:
 
   portal-web:
     image: ecattle/portal-web:latest
-    command: ["sh", "-c", "npm i & npm run serve"]
     environment:
       - VUE_APP_CLOUD=${VUE_APP_CLOUD}
     ports:
       - "${WEB_PORT}:8080"
     networks:
-      - manager_network
+      - swarm_network
     deploy:
       mode: replicated
       replicas: 2
@@ -41,13 +41,12 @@ services:
 
   gestor-inquilino:
     image: ecattle/gestor-inquilino:latest
-    command: ["sh", "-c", "npm i & npm run serve"]
     environment:
       - VUE_APP_CLOUD=${VUE_APP_CLOUD}
     ports:
       - "${MANAGER_PORT}:8080"
     networks:
-      - manager_network
+      - swarm_network
     deploy:
       mode: replicated
       replicas: 2
@@ -58,10 +57,10 @@ services:
       ports:
         - "${MONGO_PORT}:27017"
       networks:
-        - manager_network
+        - swarm_network
       deploy:
         mode: replicated
-        replicas: 2
+        replicas: 1
         placement:
           constraints: [node.role == manager]
   mail:
@@ -70,14 +69,46 @@ services:
       ports:
         - "${DOCKER_EMAIL}:8025"
       networks:
-        - manager_network
+        - swarm_network
       deploy:
         mode: replicated
         replicas: 2
         placement:
           constraints: [node.role == manager]
+  scheduler:
+    image: ecattle/node-scheduler:latest
+    command: ["sh", "-c", "npm i & npm run start"]
+    volumes:
+      - farms_data:/usr/src/app
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+    networks:
+      - swarm_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+  agendash:
+    image: agenda/agendash
+    environment: #ATUALIZAR URL MONGO
+      - MONGODB_URI=mongodb://database:27017 
+      - COLLECTION=schedulerJob
+    ports:
+      - "2999:3000"
+    networks:
+      - swarm_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+  
 
 networks:
-  manager_network:
-    driver: overlay # swarm requer driver overlay
-    attachable: true # containers fora do swarm podem se conectar aos serviços
+  swarm_network:
+    external: true
+
+volumes:
+  farms_data:
