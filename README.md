@@ -54,34 +54,39 @@ docker stack deploy -c portainer-agent-stack.yml portainer
 https://user-images.githubusercontent.com/2881494/214864162-a4a3d7b2-72c0-43dc-b420-ef3d31308811.mp4
 >##### Observação: Adicionar o token criado na variável de ambiente TOKEN_PORTAINER_API
 
-### Fazer *download* do arquivo de configuração do ambiente *swarm*
-```
-wget https://raw.githubusercontent.com/e-cattle/swarm/main/StartCloudEnvironment.yml
-```
+### IMPORTANTE: Para criar o ambiente *cloud* é possível utilizando terminal ou via portainer
 
-### Configurando variáveis de ambiente que serão utilizadas na rede *swarm* pelos *containers*
-```
-env NODE_ENV="" NODE_PORT="" MONGO_PORT=""  JWT_SECRET=""  
-SMTP_HOST="" SMTP_PORT="" SMTP_SECURE="" SMTP_FROM="" DOCKER_EMAIL=""
-VUE_APP_CLOUD="nomeStackSwarm_nomeServiçoCloudAPI" TOKEN_PORTAINER_API=""
-```
+- Criando ambiente *cloud* via terminal
+  ### Fazer *download* do arquivo de configuração do ambiente *swarm*
+  ```
+  wget https://raw.githubusercontent.com/e-cattle/swarm/main/StartCloudEnvironment.yml
+  ```
 
-### Executando *stack* do *swarm*
-```
-docker stack deploy -c StartCloudEnvironment.yml nomeStackSwarm
-```
+  ### Configurando variáveis de ambiente que serão utilizadas na rede *swarm* pelos *containers*
+  ```
+  env NODE_ENV="" NODE_PORT="" MONGO_PORT=""  JWT_SECRET=""  
+  SMTP_HOST="" SMTP_PORT="" SMTP_SECURE="" SMTP_FROM="" DOCKER_EMAIL=""
+  VUE_APP_CLOUD="nomeStackSwarm_nomeServiçoCloudAPI" TOKEN_PORTAINER_API=""
+  ```
 
-### Explicação das variáveis de ambiente utilizadas anteriormente
+  ### Executando *stack* do *swarm*
+  ```
+  docker stack deploy -c StartCloudEnvironment.yml nomeStackSwarm
+  ```
 
-- **NODE_ENV**: Especifica se o ambiente é *development*, *production* ou *test*;
-- **NODE_PORT**: Porta que o Node do *container guest* será exposta no *host*;
-- **MONGO_PORT**: Porta que o MongoDB do *container guest* será exposta no *host*;
-- **JWT_SECRET**: Token utilizado pelo JWT no *payload*;
-- **SMTP_HOST**: Nome do serviço de e-mail dentro da *stack*;
-- **SMTP_PORT**: Porta do serviço de e-mail dentro da *stack*;
-- **SMTP_SECURE**: Indica se o serviço SMTP utilizará SSL;
-- **SMTP_FROM**: Texto padrão do campo Assunto do e-mail;
-- **DOCKER_EMAIL**: Porta que o SMTP vai rodar no *host*;
-- **VUE_APP_CLOUD**: Nome do serviço da API do ambiente *cloud*;
-- **TOKEN_PORTAINER_API**: Token para consumir API do portainer;
+  ### Explicação das variáveis de ambiente utilizadas anteriormente
 
+  - **NODE_ENV**: Especifica se o ambiente é *development*, *production* ou *test*;
+  - **NODE_PORT**: Porta que o Node do *container guest* será exposta no *host*;
+  - **MONGO_PORT**: Porta que o MongoDB do *container guest* será exposta no *host*;
+  - **JWT_SECRET**: Token utilizado pelo JWT no *payload*;
+  - **SMTP_HOST**: Nome do serviço de e-mail dentro da *stack*;
+  - **SMTP_PORT**: Porta do serviço de e-mail dentro da *stack*;
+  - **SMTP_SECURE**: Indica se o serviço SMTP utilizará SSL;
+  - **SMTP_FROM**: Texto padrão do campo Assunto do e-mail;
+  - **DOCKER_EMAIL**: Porta que o SMTP vai rodar no *host*;
+  - **VUE_APP_CLOUD**: Nome do serviço da API do ambiente *cloud*;
+  - **TOKEN_PORTAINER_API**: Token para consumir API do portainer;
+
+- Criando ambiente *cloud* via Portainer
+  . . .
