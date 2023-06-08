@@ -35,7 +35,7 @@ docker swarm init --advertise-addr eth0
 
 ### Criando a rede para que todos os serviços façam parte e consigam se comunicar
 ```
-docker network create manager_network --driver overlay --attachable 
+docker network create swarm_network --driver overlay --attachable 
 ```
 
 ### Adicione os nós *workers* na rede *swarm* conforme instruções geradas pelo comando anterior   
@@ -45,7 +45,7 @@ docker swarm join --token tokenGeradoPeloCOmandoAnterior ipEPortaGeradosPeloComa
 
 ### Instalando portainer para gerenciamento do ambiente *swarm*
 ```
-curl -L https://downloads.portainer.io/ce2-17/portainer-agent-stack.yml -o portainer-agent-stack.yml
+curl -L https://downloads.portainer.io/ce2-18/portainer-agent-stack.yml -o portainer-agent-stack.yml
 docker stack deploy -c portainer-agent-stack.yml portainer
 ```
 >##### Observação: Abrir porta 9000 no navegador e configurar usuário e senha para o portainer
@@ -56,7 +56,7 @@ https://user-images.githubusercontent.com/2881494/214864162-a4a3d7b2-72c0-43dc-b
 
 ### Fazer *download* do arquivo de configuração do ambiente *swarm*
 ```
-wget https://raw.githubusercontent.com/e-cattle/swarm/main/swarm.yml
+wget https://raw.githubusercontent.com/e-cattle/swarm/main/StartCloudEnvironment.yml
 ```
 
 ### Configurando variáveis de ambiente que serão utilizadas na rede *swarm* pelos *containers*
@@ -68,7 +68,7 @@ VUE_APP_CLOUD="nomeStackSwarm_nomeServiçoCloudAPI" TOKEN_PORTAINER_API=""
 
 ### Executando *stack* do *swarm*
 ```
-docker stack deploy -c swarm.yml nomeStackSwarm
+docker stack deploy -c StartCloudEnvironment.yml nomeStackSwarm
 ```
 
 ### Explicação das variáveis de ambiente utilizadas anteriormente
