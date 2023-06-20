@@ -54,6 +54,12 @@ docker stack deploy -c portainer-agent-stack.yml portainer
 https://user-images.githubusercontent.com/2881494/214864162-a4a3d7b2-72c0-43dc-b420-ef3d31308811.mp4
 >##### Observação: Adicionar o token criado na variável de ambiente TOKEN_PORTAINER_API
 
+### Descobrir ID do ambiente *swarm*, utilizado nas requisições para API do portainer
+```
+docker info | grep "ClusterID"
+```
+>##### Observação: Adicionar o ID descoberto na variável de ambiente SWARM_ID
+
 ### IMPORTANTE: Para criar o ambiente *cloud* é possível utilizando terminal ou via portainer
 
 - Criando ambiente *cloud* via terminal
@@ -66,7 +72,7 @@ https://user-images.githubusercontent.com/2881494/214864162-a4a3d7b2-72c0-43dc-b
   ```
   env NODE_ENV="" NODE_PORT="" MONGO_PORT=""  JWT_SECRET=""  
   SMTP_HOST="" SMTP_PORT="" SMTP_SECURE="" SMTP_FROM="" DOCKER_EMAIL=""
-  VUE_APP_CLOUD="nomeStackSwarm_nomeServiçoCloudAPI" TOKEN_PORTAINER_API=""
+  VUE_APP_CLOUD="nomeStackSwarm_nomeServiçoCloudAPI" TOKEN_PORTAINER_API="" SWARM_ID=""
   ```
 
   ### Executando *stack* do *swarm*
@@ -87,6 +93,7 @@ https://user-images.githubusercontent.com/2881494/214864162-a4a3d7b2-72c0-43dc-b
   - **DOCKER_EMAIL**: Porta que o SMTP vai rodar no *host*;
   - **VUE_APP_CLOUD**: Nome do serviço da API do ambiente *cloud*;
   - **TOKEN_PORTAINER_API**: Token para consumir API do portainer;
+  - **SWARM_ID**: ID da rede swarm, utilizado nas requisições via API do portainer;
 
 - Criando ambiente *cloud* via Portainer
   . . .
