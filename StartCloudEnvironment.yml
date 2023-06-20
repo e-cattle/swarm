@@ -96,8 +96,8 @@ services:
         constraints: [node.role == manager]
   agendash:
     image: agenda/agendash
-    environment: #ATUALIZAR URL MONGO
-      - MONGODB_URI=mongodb://database:27017 
+    environment:
+      - MONGODB_URI=mongodb://database
       - COLLECTION=schedulerJob
     ports:
       - "2999:3000"
