@@ -82,6 +82,7 @@ services:
       - URL_API_PORTAINER=${VUE_APP_CLOUD}
       - TOKEN_API_PORTAINER=${TOKEN_API_PORTAINER}
       - SWARM_ID=${SWARM_ID}
+      - JWT_SECRET=${JWT_SECRET}
     command: ["sh", "-c", "npm i & npm run start"]
     volumes:
       - farms_data:/usr/src/app
