@@ -79,7 +79,7 @@ services:
     image: ecattle/node-scheduler:latest
     environment:
       - URL_MONGO=database
-      - URL_API_PORTAINER=${VUE_APP_CLOUD}
+      - URL_API_PORTAINER=${URL_API_PORTAINER}
       - TOKEN_API_PORTAINER=${TOKEN_API_PORTAINER}
       - SWARM_ID=${SWARM_ID}
       - JWT_SECRET=${JWT_SECRET}
