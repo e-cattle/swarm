@@ -93,7 +93,6 @@ docker info | grep "ClusterID"
   - **DOCKER_EMAIL**: Porta que o SMTP vai rodar no *host*;
   - **VUE_APP_CLOUD**: Nome do serviço da API do ambiente *cloud*;
   - **TOKEN_PORTAINER_API**: Token para consumir API do portainer;
+  - **URL_API_PORTAINER**: URL da API do portainer;
   - **SWARM_ID**: ID da rede swarm, utilizado nas requisições via API do portainer;
 
-- Criando ambiente *cloud* via Portainer
-  . . .
